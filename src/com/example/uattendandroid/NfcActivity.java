@@ -55,5 +55,9 @@ public class NfcActivity extends Activity {
         int signedInt = wrapped.getInt();
         long number = signedInt & 0xffffffffl;
         tv1.setText("Tag detected: " + number);
+        
+        //do stuff here
+        
+        
     }
 }

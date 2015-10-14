@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -67,7 +69,7 @@ public class PinActivity extends Activity {
 					try
 					{
 						//http://10.0.0.3:8888/SignIn.aspx?id=1006&num=235346
-					    String stringUrl = getResources().getString(R.string.serverURL) + "id=" + mEdit.getText().toString() + "&num=" + stringBuilder.toString();
+					    String stringUrl = getResources().getString(R.string.serverURLSignIn) + "id=" + mEdit.getText().toString() + "&num=" + stringBuilder.toString();
 						new DownloadWebpageTask().execute(stringUrl);
 					}
 					catch (Exception e) {
@@ -90,6 +92,40 @@ public class PinActivity extends Activity {
         	TextView tv1;
         	tv1 = (TextView)findViewById(R.id.textView1);
         	tv1.setText(result);
+        	
+        	/*StringBuilder stringBuilder = null;
+        	
+        	try {
+		        InputStream inputStream = openFileInput("config.txt");
+
+		        if ( inputStream != null ) {
+		            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+		            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		            String receiveString = "";
+		            stringBuilder = new StringBuilder();
+
+		            while ( (receiveString = bufferedReader.readLine()) != null ) {
+		                stringBuilder.append(receiveString);
+		            }
+		            inputStream.close();
+		        }
+		    }
+		    catch (FileNotFoundException e) {
+		        //Log.e("login activity", "File not found: " + e.toString());
+		    } 
+			catch (IOException e) {
+		        //Log.e("login activity", "Can not read file: " + e.toString());
+		    }
+        	
+        	//open URL
+			try
+			{
+			    String stringUrl = getResources().getString(R.string.serverURL) + "id=" + result + "&num=" + stringBuilder.toString();
+				new DownloadWebpageTask().execute(stringUrl);
+			}
+			catch (Exception e) {
+		        //Log.e("login activity", "Can not read file: " + e.toString());
+		    }*/
        }
     }
 	

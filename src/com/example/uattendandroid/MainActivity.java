@@ -153,7 +153,10 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-	
+	public void loginClick(View view) {
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
+	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		TextView tv1;
@@ -206,7 +209,7 @@ public class MainActivity extends Activity {
 				    myURLConnection.connect();*/
 					//http://10.0.0.3:8888/SignIn.aspx?id=1006&num=235346
 					
-				    String stringUrl = getResources().getString(R.string.serverURL) + "id=" + QRcontents + "&num=" + stringBuilder.toString();
+				    String stringUrl = getResources().getString(R.string.serverURLSignIn) + "id=" + QRcontents + "&num=" + stringBuilder.toString();
 					new DownloadWebpageTask().execute(stringUrl);
 				}
 				catch (Exception e) {
