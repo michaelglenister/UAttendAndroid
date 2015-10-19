@@ -9,7 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -31,50 +33,58 @@ public class PinActivity extends Activity {
 	    mButton = (Button)findViewById(R.id.btnEnterPin);
 	    mEdit   = (EditText)findViewById(R.id.txtPin);
 
+	    mView = (TextView)findViewById(R.id.textView1);
+	    
 	    mButton.setOnClickListener(
 	        new View.OnClickListener()
 	        {
 	            public void onClick(View view)
 	            {
-	            	mView = (TextView)findViewById(R.id.textView1);
-	            	mView.setText("Processing...");
-	                //Log.v("EditText", mEdit.getText().toString());
-	            	
-	            	StringBuilder stringBuilder = null;
-	            	
-	            	//read file
-	            	try {
-				        InputStream inputStream = openFileInput("config.txt");
+	            	if(mEdit.getText().toString().trim().isEmpty())
+	            	{
+	            		mView.setText("No Pin Code Entered");
+	            	}
+	            	else
+	            	{
+		            	mView.setText("Processing...");
+		                //Log.v("EditText", mEdit.getText().toString());
+		            	
+		            	StringBuilder stringBuilder = null;
+		            	
+		            	//read file
+		            	try {
+					        InputStream inputStream = openFileInput("config.txt");
 
-				        if ( inputStream != null ) {
-				            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-				            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-				            String receiveString = "";
-				            stringBuilder = new StringBuilder();
+					        if ( inputStream != null ) {
+					            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+					            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+					            String receiveString = "";
+					            stringBuilder = new StringBuilder();
 
-				            while ( (receiveString = bufferedReader.readLine()) != null ) {
-				                stringBuilder.append(receiveString);
-				            }
-				            inputStream.close();
-				        }
-				    }
-				    catch (FileNotFoundException e) {
-				        //Log.e("login activity", "File not found: " + e.toString());
-				    } 
-					catch (IOException e) {
-				        //Log.e("login activity", "Can not read file: " + e.toString());
-				    }
-	            	
-	            	//open URL
-					try
-					{
-						//http://10.0.0.3:8888/SignIn.aspx?id=1006&num=235346
-					    String stringUrl = getResources().getString(R.string.serverURLSignIn) + "id=" + mEdit.getText().toString() + "&num=" + stringBuilder.toString();
-						new DownloadWebpageTask().execute(stringUrl);
-					}
-					catch (Exception e) {
-				        //Log.e("login activity", "Can not read file: " + e.toString());
-				    }
+					            while ( (receiveString = bufferedReader.readLine()) != null ) {
+					                stringBuilder.append(receiveString);
+					            }
+					            inputStream.close();
+					        }
+					    }
+					    catch (FileNotFoundException e) {
+					        //Log.e("login activity", "File not found: " + e.toString());
+					    } 
+						catch (IOException e) {
+					        //Log.e("login activity", "Can not read file: " + e.toString());
+					    }
+		            	
+		            	//open URL
+						try
+						{
+							//http://10.0.0.3:8888/SignIn.aspx?id=1006&num=235346
+						    String stringUrl = getResources().getString(R.string.serverURLSignIn) + "id=" + mEdit.getText().toString() + "&num=" + stringBuilder.toString();
+							new DownloadWebpageTask().execute(stringUrl);
+						}
+						catch (Exception e) {
+					        //Log.e("login activity", "Can not read file: " + e.toString());
+					    }
+	            	}
 	            }
 	        });
 	}
@@ -84,14 +94,24 @@ public class PinActivity extends Activity {
             try {
                 return downloadUrl(urls[0]);
             } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+                return "Unable to Complete Request";
             }
         }
         
         protected void onPostExecute(String result) {
         	TextView tv1;
         	tv1 = (TextView)findViewById(R.id.textView1);
-        	tv1.setText(result);
+        	//tv1.setText(result);
+        	if(result == "oK")
+        	{
+        		Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        		intent.putExtra("SIGNIN_RESULT", result);
+        		startActivity(intent);
+        	}
+        	else
+        	{
+        		tv1.setText("Request Failed");
+        	}
         	
         	/*StringBuilder stringBuilder = null;
         	

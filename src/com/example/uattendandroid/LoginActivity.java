@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -63,7 +64,7 @@ public class LoginActivity extends Activity {
     	//open URL
 		try
 		{
-		    String stringUrl = getResources().getString(R.string.serverURLLogin) + email + "/" + password;
+		    String stringUrl = getResources().getString(R.string.serverAPI) + "api/mobile/" + email + "/" + password;
 			new DownloadWebpageTask().execute(stringUrl);
 		}
 		catch (Exception e) {
@@ -71,7 +72,7 @@ public class LoginActivity extends Activity {
 	    }
 	}
 	
-	private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+	public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
             try {
                 return downloadUrl(urls[0]);
@@ -83,7 +84,7 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(String result) {
         	TextView tv1;
         	tv1 = (TextView)findViewById(R.id.textView1);
-        	tv1.setText(result);
+        	//tv1.setText(result);
         	
         	if (result == "0")
         	{
@@ -91,8 +92,9 @@ public class LoginActivity extends Activity {
         	}
         	else
         	{
-        		//Intent intent = new Intent(this, NfcOptionsActivity.class);
-        		//startActivity(intent);
+        		Intent intent = new Intent(getBaseContext(), NfcOptionsActivity.class);
+        		intent.putExtra("LECTURER_ID", result);
+        		startActivity(intent);
         	}
        }
     }

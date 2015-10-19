@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/linearLayoutFirstRun" >
-    
+    android:id="@+id/linearLayoutFirstRun"
+    android:background="@drawable/logo" >
+
     <EditText
         android:id="@+id/txtStudNumber"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
         android:ems="10"
-    	android:inputType="numberDecimal" >
+        android:hint="Student number"
+        android:inputType="numberDecimal" >
 
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
 
     <Button
         android:id="@+id/btnEnterNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStudNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
         android:text="Enter" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Enter Student Number" />
+
+</RelativeLayout>

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/logo" >
 
     <TextView
         android:id="@+id/textView1"
@@ -14,47 +15,36 @@
         android:text="Logged in as:" />
 
     <TextView
-        android:id="@+id/txtStudNo"
+        android:id="@+id/txtUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:text="stud no" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/txtStudNo"
-        android:layout_marginTop="24dp"
-        android:text="NFC Options:" />
+        android:text="user" />
     
     <RadioGroup
         android:id="@+id/rdoNfcOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/txtStudNo"
         android:layout_centerHorizontal="true" >
-
-        <RadioButton
-            android:id="@+id/rdoDisabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="NFC disabled" />
-
-        <RadioButton
-            android:id="@+id/rdoSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student sign in" />
-
-        <RadioButton
-            android:id="@+id/rdoAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add students" />
     </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtUser"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txtUser"
+        android:layout_below="@+id/spinner1"
+        android:layout_marginTop="91dp"
+        android:text="TextView" />
 
 </RelativeLayout>

@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,18 +33,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		prefs = getSharedPreferences("com.example.uattendandroid", MODE_PRIVATE);
-		setContentView(R.layout.activity_main);
 		
+		setContentView(R.layout.activity_main);
 		//write to a file
-		try {
+		/*try {
 	        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_PRIVATE));
 	        outputStreamWriter.write("");
 	        outputStreamWriter.close();
 	    }
 	    catch (IOException e) {
 	        //Log.e("Exception", "File write failed: " + e.toString());
-	    } 
-		prefs.edit().putBoolean("firstrun", true).commit();
+	    } */
+		//prefs.edit().putBoolean("firstrun", true).commit();
 		//read from file
 		try {
 	        InputStream inputStream = openFileInput("config.txt");
@@ -63,7 +64,7 @@ public class MainActivity extends Activity {
 	            //display string from file
 	            TextView tv1;
 	    		tv1 = (TextView)findViewById(R.id.textView1);
-	    		tv1.setText("Hello " + stringBuilder.toString());
+	    		tv1.setText("Welcome Student\n" + stringBuilder.toString());
 	        }
 	    }
 	    catch (FileNotFoundException e) {
@@ -95,7 +96,12 @@ public class MainActivity extends Activity {
 	            //display string from file
 	            TextView tv1;
 	    		tv1 = (TextView)findViewById(R.id.textView1);
-	    		tv1.setText("Hello " + stringBuilder.toString());
+	    		tv1.setText("Welcome Student\n" + stringBuilder.toString());
+	    		
+	    		TextView tv2;
+	    		tv2 = (TextView)findViewById(R.id.textView2);
+	    		tv2.setText("Select QR Scan to scan the code given by the lecturer\n\nSelect Pin Code if your device does not support QR scanning");
+	    		
 	        }
 	    }
 	    catch (FileNotFoundException e) {
@@ -229,7 +235,7 @@ public class MainActivity extends Activity {
             try {
                 return downloadUrl(urls[0]);
             } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+                return "Unable to Complete Request";
             }
         }
         
@@ -260,7 +266,7 @@ public class MainActivity extends Activity {
 	        //Log.d(DEBUG_TAG, "The response is: " + response);
 	        is = conn.getInputStream();
 	        
-	        return "oK";
+	        return "Successfully signed into class";
 	        
 	    // Makes sure that the InputStream is closed after the app is
 	    // finished using it.
